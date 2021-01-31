@@ -1,17 +1,61 @@
 public class TicTacToe {
 
-  // instance variables
-  private int[][] board;
+  private char[][] board;
+  private int boardSize = 3;
+  private char playerLetter;
 
-  public void board() {
+  public TicTacToe() {
+    // default player letter
+    playerLetter = 'X';
+    board = new char[boardSize][boardSize];
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        board[i][j] = 0;
+        board[i][j] = ' ';
       }
     }
   }
 
+  public void printBoard() {
+    System.out.println("    1   2   3  ");
+    System.out.print("  -------------\n");
+    for (int i = 0; i < 3; i++) {
+      System.out.print((i + 1) + " | ");
+      for (int j = 0; j < 3; j++) {
+        System.out.print(board[i][j] + " | ");
+      }
+      System.out.print("\n  -------------\n");
+    }
+  }
+
+  public void placeLetter(int xPos, int yPos) {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (board[xPos][yPos] == ' ') {
+          board[xPos][yPos] = playerLetter;
+        }
+      }
+    }
+  }
+
+  public boolean isCellFull(int xPos, int yPos) {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (board[xPos][yPos] == ' ') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   public boolean isGameOver() {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (board[i][j] == ' ') {
+          return false;
+        }
+      }
+    }
     return true;
   }
 
@@ -19,11 +63,15 @@ public class TicTacToe {
     return true;
   }
 
-  public void computerDifficulty(String difficulty) {
-
+  public void twoPlayerMode() {
+    if (playerLetter == 'X') {
+      playerLetter = 'O';
+    } else {
+      playerLetter = 'X';
+    }
   }
 
-  public static void main(String[] args) {
+  public void computerDifficulty(String difficulty) {
 
   }
 }
