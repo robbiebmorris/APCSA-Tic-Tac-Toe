@@ -25,14 +25,15 @@ public class Minimax extends Board {
 
   // terminology:
   // terminal node: node with no children
-  public int[] minimax(int[][] board, int depth, boolean maximising) {
+  public static int[] minimax(Board board, int depth, boolean maximising) {
+
+    // undetermined
 
     return new int[] { 1, 2 };
   }
 
   // heuristic board evaluation
-  public int evaluateBoard(Board board) {
-    // tictactoe is a zero sum game
+  public static int evaluateBoard(Board board) {
     int sumX = 0;
     int sumO = 0;
     int countX = 0;
@@ -85,28 +86,23 @@ public class Minimax extends Board {
     countX = 0;
 
     // check left to right diagonal
-    for (int i = boardSize - 1; i > -1; i--) {
-      if (board.getNode(i, i).getNode() == 'X') {
+    for (int i = 0; i < boardSize; i++) {
+      if (board.getNode(i, (boardSize - 1) - i).getNode() == 'X') {
         countX++;
       }
-      if (board.getNode(i, i).getNode() == 'O') {
+      if (board.getNode(i, (boardSize - 1) - i).getNode() == 'O') {
         countO++;
       }
     }
     sumX += valueCounter(countX, countO, true);
     sumO += valueCounter(countX, countO, false);
-    countO = 0;
-    countX = 0;
-
     return sumX + sumO;
   }
 
   // if true, return sumX. if not, return sumO
-  public int valueCounter(int countX, int countO, boolean sumType) {
-
+  public static int valueCounter(int countX, int countO, boolean sumType) {
     int sumO = 0;
     int sumX = 0;
-
     if (countO == 3) {
       sumO -= 100;
     } else if (countO == 2 && countX == 0) {
@@ -114,7 +110,6 @@ public class Minimax extends Board {
     } else if (countO == 1 && countX == 0) {
       sumO -= 1;
     }
-
     if (countX == 3) {
       sumX += 100;
     } else if (countX == 2 && countO == 0) {
@@ -122,16 +117,24 @@ public class Minimax extends Board {
     } else if (countX == 1 && countO == 0) {
       sumX += 1;
     }
-
     if (sumType) {
       return sumX;
     }
     return sumO;
   }
 
-  // Based off of the negamax implementation of the minimax algorithm:
-  // https://en.wikipedia.org/wiki/Negamax
-  public void negaMax(int depth, String player) {
+  public static void main(String[] args) {
+    Board board = new Board();
+    board.newBoard();
+    board.placeNode(1, 1, true);
+    board.placeNode(2, 0, false);
+    board.placeNode(0, 2, true);
+    board.placeNode(1, 0, false);
+    board.placeNode(2, 2, true);
+    board.placeNode(0, 1, false);
 
+    // board.placeNode(1, 2, false);
+    board.printBoard();
+    System.out.println(evaluateBoard(board));
   }
 }
