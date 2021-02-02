@@ -1,12 +1,16 @@
 public class TicTacToe {
 
-  private char[][] board;
-  private int boardSize = 3;
+  char[][] board;
+  int boardSize = 3;
   private char playerLetter;
 
   public TicTacToe() {
     // default player letter
     playerLetter = 'X';
+    newBoard();
+  }
+
+  public void newBoard() {
     board = new char[boardSize][boardSize];
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
@@ -15,6 +19,7 @@ public class TicTacToe {
     }
   }
 
+  // temporary
   public void printBoard() {
     System.out.println("    1   2   3  ");
     System.out.print("  -------------\n");
@@ -38,12 +43,8 @@ public class TicTacToe {
   }
 
   public boolean isCellFull(int xPos, int yPos) {
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        if (board[xPos][yPos] == ' ') {
-          return false;
-        }
-      }
+    if (board[xPos][yPos] == ' ') {
+      return false;
     }
     return true;
   }
@@ -69,9 +70,5 @@ public class TicTacToe {
     } else {
       playerLetter = 'X';
     }
-  }
-
-  public void computerDifficulty(String difficulty) {
-
   }
 }
