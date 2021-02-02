@@ -1,5 +1,5 @@
 public enum Node {
-  X('x'), O('o'), EMPTY('-');
+  X('X'), O('O'), EMPTY('-');
 
   private final char node;
 
