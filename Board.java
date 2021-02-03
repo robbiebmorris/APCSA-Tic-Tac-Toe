@@ -25,6 +25,24 @@ public class Board {
     }
   }
 
+  /*     public String toString()//Adapting the print board method to make it better
+     {
+          String boardOutput = "\n+-----+\n";
+          for (int i = 0; i < ROWS; i++)
+          {
+               boardOutput += "|";
+               for (int j = 0; j < COLUMNS; j++)
+               {
+                    boardOutput += board [i][j] + "|";
+               }
+               boardOutput += "\n+-----+\n";
+          }
+          boardOutput += "\n\n";
+          
+          return boardOutput;
+     }//end toString method
+     */
+
   public boolean isCellFull(int xPos, int yPos) {
     if (board[xPos][yPos] == Node.EMPTY) {
       return false;
@@ -56,8 +74,68 @@ public class Board {
   }
 
   // for niall to do
-  //
-  public void checkWinner() {
+    public Node checkBoard ()// This checks who has won the game 
+    {
+         boolean fullBoard = true;
+         
+         //Check if the board is full and nobody won.
+         //Note: The board is not full in any space is " "
+         for (int i = 0; i < boardSize; i++)
+              for (int j = 0; j < boardSize; j++)
+                  if (board [i][j]==Node.EMPTY)
+                      fullBoard = false;
+         
+         
+         // Next check all rows across.
+         for (int i = 0; i < boardSize; i ++)
+              if (board [i][0]==(board [i][1]) &&
+                  board[i][1]==(board[i][2]) &&
+                  board[i][0]!=Node.EMPTY)
+              if (board [i][0]== Node.X)
+                   return Node.X;
+              else
+                   return Node.O;
+         
+         // Next check all columns down.
+         for (int j = 0; j < boardSize; j ++)
+              if (board [0][j]==(board [1][j]) &&
+                  board[1][j]==(board[2][j]) &&
+                  board[0][j]!= Node.EMPTY)
+              if (board [0][j]==Node.X)
+              return Node.X;
+         else
+              return Node.O;
+         
+         
+         // Now check diagonal, down-right.
+         if (board [0][0]==(board [1][1]) &&
+             board[1][1]==(board[2][2]) &&
+                  board[0][0]!= Node.EMPTY)
+              if (board [1][1]==Node.X)
+                   return Node.X;
+              else
+                   return Node.O;
+         
+         // Now check diagonal, down-left.
+         if (board [0][2]==(board [1][1]) &&
+             board[1][1]==(board[2][0]) &&
+                  board[0][2] != Node.EMPTY )
+              if (board [1][1]== Node.X)
+                   return Node.X;
+              else
+                   return Node.O;
+         
+         
+         //If fullBoard is still false,
+         //   return "N" to keep playing.
+         if (!fullBoard)
+              return null;
+         
+         //If we reach this line,
+         //  no one has won so return "T"
+         return Node.EMPTY;
+         
+    }// end checkBoard method
     // check columns for win
 
     // check rows for win

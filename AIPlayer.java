@@ -4,7 +4,7 @@ public class AIPlayer {
 
   }
 
-  public void normalAI() {
+  public void normalAI() {//4.make a random number generator that finds the values that are not taken (board and node.ajva)
     // 1. if a winning move is available, take it
     // 2. if the opponent is threatening a winning play, block it.
     // 3. if the centre square is available, take it
