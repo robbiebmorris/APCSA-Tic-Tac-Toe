@@ -132,8 +132,7 @@ public class Minimax extends Board {
     board.placeNode(1, 0, false);
     board.placeNode(2, 2, true);
     board.placeNode(0, 1, false);
-
-    // board.placeNode(1, 2, false);
+    board.placeNode(1, 2, false);
     board.printBoard();
     System.out.println(evaluateBoard(board));
   }
