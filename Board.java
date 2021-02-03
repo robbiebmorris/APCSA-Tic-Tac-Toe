@@ -56,12 +56,8 @@ public class Board {
     return this.board[row][col];
   }
 
-  public void placeNode(int row, int col, boolean isX) {
-    if (isX) {
-      board[row][col] = Node.X;
-    } else {
-      board[row][col] = Node.O;
-    }
+  public void placeNode(int row, int col, Node letter) {
+    board[row][col] = letter;
   }
 
   // for niall to do
@@ -92,21 +88,21 @@ public class Board {
 
     // Next check all columns down.
     for (int j = 0; j < boardSize; j++)
-      if (board[0][j] == (board[1][j]) && board[1][j] == (board[2][j]) && board[0][j] != Node.EMPTY)
+      if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != Node.EMPTY)
         if (board[0][j] == Node.X)
           return Node.X;
         else
           return Node.O;
 
     // Now check diagonal, down-right.
-    if (board[0][0] == (board[1][1]) && board[1][1] == (board[2][2]) && board[0][0] != Node.EMPTY)
+    if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != Node.EMPTY)
       if (board[1][1] == Node.X)
         return Node.X;
       else
         return Node.O;
 
     // Now check diagonal, down-left.
-    if (board[0][2] == (board[1][1]) && board[1][1] == (board[2][0]) && board[0][2] != Node.EMPTY)
+    if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != Node.EMPTY)
       if (board[1][1] == Node.X)
         return Node.X;
       else
@@ -116,14 +112,8 @@ public class Board {
     if (!fullBoard)
       return null;
 
-    // If we reach this line, no one has won
+    // If we reach this line, no one has won and it is a tie
     return Node.EMPTY;
 
   }// end checkBoard method
-   // check columns for win
-
-  // check rows for win
-
-  // check diaganols for win
-
 }
