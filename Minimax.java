@@ -164,18 +164,4 @@ public class Minimax extends Board {
     }
     return sumO;
   }
-
-  public static void main(String[] args) {
-    Board board = new Board();
-    board.newBoard();
-    board.placeNode(1, 1, Node.X);
-    board.placeNode(2, 0, Node.O);
-    board.placeNode(0, 2, Node.X);
-    board.placeNode(1, 0, Node.O);
-    // board.placeNode(2, 2, Node.X);
-    // board.placeNode(0, 1, Node.O);
-    // board.placeNode(1, 2, Node.O);
-    board.printBoard();
-    System.out.println(evaluateBoard(board));
-  }
 }
