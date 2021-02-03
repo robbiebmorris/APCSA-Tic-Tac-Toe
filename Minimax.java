@@ -2,10 +2,6 @@ import java.util.*;
 
 public class Minimax extends Board {
 
-  public Minimax() {
-
-  }
-
   // Go through all of the possible moves and check if they are possible
   public List<int[]> possibleMoves() {
     List<int[]> moves = new ArrayList<int[]>();
@@ -23,13 +19,59 @@ public class Minimax extends Board {
     return moves;
   }
 
-  // terminology:
-  // terminal node: node with no children
-  public static int[] minimax(Board board, int depth, boolean maximising) {
+  // get best move given a board
+  public static int[] move(Board board, Node letter) {
+    int[] move = new int[2];
+    int maxNum = Integer.MIN_VALUE;
+    for (int row = 0; row < boardSize; row++) {
+      for (int col = 0; col < boardSize; col++) {
+        if (board.getNode(row, col) == Node.EMPTY) {
+          board.placeNode(row, col, letter);
+          int minimax = minimax(board, 5, false, letter);
+          board.placeNode(row, col, Node.EMPTY);
+          if (minimax > maxNum) {
+            move[0] = row;
+            move[1] = col;
+            maxNum = minimax;
+          }
+        }
+      }
+    }
+    return move;
+  }
 
-    // undetermined
+  public static int minimax(Board board, int depth, boolean maximizing, Node letter) {
 
-    return new int[] { 1, 2 };
+    int evaluation = evaluateBoard(board);
+    if (depth == 0 || board.isGameOver() || evaluation > 0) { // || evaluation > 0???
+      return evaluation;
+    }
+    int maxNum = Integer.MIN_VALUE;
+    int minNum = Integer.MAX_VALUE;
+
+    if (maximizing) {
+      for (int row = 0; row < boardSize; row++) {
+        for (int col = 0; col < boardSize; col++) {
+          if (board.getNode(row, col) == Node.EMPTY) {
+            board.placeNode(row, col, letter);
+            maxNum = Integer.max(maxNum, minimax(board, depth - 1, maximizing, letter));
+            board.placeNode(row, col, Node.EMPTY);
+          }
+        }
+      }
+      return maxNum;
+    } else {
+      for (int row = 0; row < boardSize; row++) {
+        for (int col = 0; col < boardSize; col++) {
+          if (board.getNode(row, col) == Node.EMPTY) {
+            board.placeNode(row, col, letter);
+            minNum = Integer.min(minNum, minimax(board, depth - 1, maximizing, letter));
+            board.placeNode(row, col, Node.EMPTY);
+          }
+        }
+      }
+      return minNum;
+    }
   }
 
   // heuristic board evaluation
@@ -126,13 +168,13 @@ public class Minimax extends Board {
   public static void main(String[] args) {
     Board board = new Board();
     board.newBoard();
-    board.placeNode(1, 1, true);
-    board.placeNode(2, 0, false);
-    board.placeNode(0, 2, true);
-    board.placeNode(1, 0, false);
-    board.placeNode(2, 2, true);
-    board.placeNode(0, 1, false);
-    board.placeNode(1, 2, false);
+    board.placeNode(1, 1, Node.X);
+    board.placeNode(2, 0, Node.O);
+    board.placeNode(0, 2, Node.X);
+    board.placeNode(1, 0, Node.O);
+    // board.placeNode(2, 2, Node.X);
+    // board.placeNode(0, 1, Node.O);
+    // board.placeNode(1, 2, Node.O);
     board.printBoard();
     System.out.println(evaluateBoard(board));
   }
