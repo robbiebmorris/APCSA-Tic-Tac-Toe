@@ -12,17 +12,8 @@ public class TicTacToe {
     while (true) {
       board.printBoard();
       System.out.println();
-      while (true) {
-        int inputx = Integer.parseInt(scan.nextLine()) - 1;
-        int inputy = Integer.parseInt(scan.nextLine()) - 1;
-        if (board.isCellFull(inputx, inputy)) {
-          continue;
-        }
-        board.placeNode(inputx, inputy, Node.O);
-        break;
-      }
-      int[] ai = Minimax.move(board, Node.X);
-      board.placeNode(ai[0], ai[1], Node.X);
+      playerMove(board, scan);
+
       board.printBoard();
       System.out.println();
       if (board.isGameOver() || board.checkBoard() == Node.X || board.checkBoard() == Node.O) {
@@ -30,5 +21,28 @@ public class TicTacToe {
       }
     }
     scan.close();
+  }
+
+  public static void playerMove(Board board, Scanner scan) {
+    while (true) {
+      int inputx = Integer.parseInt(scan.nextLine()) - 1;
+      int inputy = Integer.parseInt(scan.nextLine()) - 1;
+      if (board.isCellFull(inputx, inputy)) {
+        continue;
+      }
+      board.placeNode(inputx, inputy, Node.O);
+      break;
+    }
+  }
+
+  public static void computerMove(Board board, String difficulty) {
+    int[] ai = new int[2];
+    if (difficulty.equalsIgnoreCase("-a")) {
+      ai = PlayerAI.move(board, Node.X);
+    } else {
+      ai = PlayerAI.normalAI(); // unfinished function
+    }
+    board.placeNode(ai[0], ai[1], Node.X);
+
   }
 }
