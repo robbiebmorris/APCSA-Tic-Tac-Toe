@@ -13,7 +13,7 @@ public class TicTacToe {
       board.printBoard();
       System.out.println();
       playerMove(board, scan);
-      computerMove(board, "-a");
+      computerMove(board, "asd");
       board.printBoard();
       System.out.println();
       if (board.isGameOver() || board.checkBoard() == Node.X || board.checkBoard() == Node.O) {
@@ -25,7 +25,9 @@ public class TicTacToe {
 
   public static void playerMove(Board board, Scanner scan) {
     while (true) {
+      System.out.println("Input the x coordinate of your move: ");
       int inputx = Integer.parseInt(scan.nextLine()) - 1;
+      System.out.println("Input the y coordinate of your move: ");
       int inputy = Integer.parseInt(scan.nextLine()) - 1;
       if (board.isCellFull(inputx, inputy)) {
         continue;
@@ -40,7 +42,7 @@ public class TicTacToe {
     if (difficulty.equalsIgnoreCase("-a")) {
       ai = PlayerAI.move(board, Node.X);
     } else {
-      ai = PlayerAI.normalAI(); // unfinished function
+      ai = PlayerAI.normalAI(board, Node.X); // unfinished function
     }
     board.placeNode(ai[0], ai[1], Node.X);
 
