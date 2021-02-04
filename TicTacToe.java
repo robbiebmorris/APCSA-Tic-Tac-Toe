@@ -13,7 +13,7 @@ public class TicTacToe {
       board.printBoard();
       System.out.println();
       playerMove(board, scan);
-
+      computerMove(board, "-a");
       board.printBoard();
       System.out.println();
       if (board.isGameOver() || board.checkBoard() == Node.X || board.checkBoard() == Node.O) {
