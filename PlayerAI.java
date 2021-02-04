@@ -20,7 +20,7 @@ public class PlayerAI extends Board {
   }
 
   // get best move given a board
-  public static int[] move(Board board, Node letter) {
+  public static int[] advancedAI(Board board, Node letter) {
     int[] move = new int[2];
     int maxNum = Integer.MIN_VALUE;
     for (int row = 0; row < boardSize; row++) {
@@ -43,7 +43,12 @@ public class PlayerAI extends Board {
   public static int minimax(Board board, int depth, boolean maximizing, Node letter) {
 
     int evaluation = evaluateBoard(board);
-    if (depth == 0 || board.isGameOver() || evaluation > 0) { // || evaluation > 0???
+    // support for if the letter is O. then the evaluation has to be negative,
+    // because evaluation function is written in perspective of X player
+    if (letter == Node.O) {
+      evaluation = -evaluation;
+    }
+    if (depth == 0 || board.isGameOver() || evaluation > 0) {
       return evaluation;
     }
     int maxNum = Integer.MIN_VALUE;
@@ -203,7 +208,7 @@ public class PlayerAI extends Board {
       }
     }
     // 3. if the centre square is available, take it
-    if (board.isCellFull(1, 1)) {
+    if (!board.isCellFull(1, 1)) {
       move[0] = 1;
       move[1] = 1;
       return move;
@@ -215,6 +220,7 @@ public class PlayerAI extends Board {
       if (!board.isCellFull(randomX, randomY)) {
         move[0] = randomX;
         move[1] = randomY;
+        return move;
       }
     }
   }
