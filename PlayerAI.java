@@ -165,12 +165,59 @@ public class PlayerAI extends Board {
     return sumO;
   }
 
-  public static int[] normalAI() {// 4.make a random number generator that finds the values that are not taken
+  public static int[] normalAI(Board board, Node letter) {// 4.make a random number generator that finds the values that
+                                                          // are not taken
     // (board and node.ajva)
+    int[] move = new int[2];
     // 1. if a winning move is available, take it
-    // 2. if the opponent is threatening a winning play, block it.
-    // 3. if the centre square is available, take it
-    // 4. else choose randomly between any remaining square
+    for (int row = 0; row < boardSize; row++) {
+      for (int col = 0; col < boardSize; col++) {
+        if (!board.isCellFull(row, col)) {
+          board.placeNode(row, col, letter);
+          if (board.checkBoard() == letter) {
+            move[0] = row;
+            move[1] = col;
+            return move;
+          }
+          board.placeNode(row, col, Node.EMPTY);
+        }
+      }
+    }
 
+    // 2. if the opponent is threatening a winning play, block it.
+    Node opponentLetter;
+    for (int row = 0; row < boardSize; row++) {
+      for (int col = 0; col < boardSize; col++) {
+        if (!board.isCellFull(row, col)) {
+          if (letter == Node.O) {
+            opponentLetter = Node.X;
+          } else {
+            opponentLetter = Node.O;
+          }
+          board.placeNode(row, col, opponentLetter);
+          if (board.checkBoard() == opponentLetter) {
+            move[0] = row;
+            move[1] = col;
+            return move;
+          }
+          board.placeNode(row, col, Node.EMPTY);
+        }
+      }
+    }
+    // 3. if the centre square is available, take it
+    if (board.isCellFull(1, 1)) {
+      move[0] = 1;
+      move[1] = 1;
+      return move;
+    }
+    // 4. else choose randomly between any remaining square
+    while (true) {
+      int randomX = (int) (Math.random() * 2);
+      int randomY = (int) (Math.random() * 2);
+      if (!board.isCellFull(randomX, randomY)) {
+        move[0] = randomX;
+        move[1] = randomY;
+      }
+    }
   }
 }
