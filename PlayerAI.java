@@ -165,9 +165,7 @@ public class PlayerAI extends Board {
     return sumO;
   }
 
-  public static int[] normalAI(Board board, Node letter) {// 4.make a random number generator that finds the values that
-                                                          // are not taken
-    // (board and node.ajva)
+  public static int[] normalAI(Board board, Node letter) {
     int[] move = new int[2];
     // 1. if a winning move is available, take it
     for (int row = 0; row < boardSize; row++) {
