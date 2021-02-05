@@ -17,15 +17,16 @@ public class Board {
   }
 
   public void printBoard() {
-    System.out.println("---------------");
+    System.out.println("    1   2   3");
+    System.out.println("  -------------");
     for (int row = 0; row < boardSize; row++) {
-      System.out.print(" | ");
+      System.out.print((row + 1) + " | ");
       for (int col = 0; col < boardSize; col++) {
         System.out.print(board[row][col].getNode());
         System.out.print(" | ");
       }
       System.out.println();
-      System.out.println("---------------");
+      System.out.println("  -------------");
 
     }
   }
