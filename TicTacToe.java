@@ -12,11 +12,11 @@ public class TicTacToe {
       board.printBoard();
       int xOrOs = (int) (Math.random() * (2 - 1 + 1) + 1);
       if (xOrOs == 1) {
-        System.out.println("You go first.");
+        System.out.println("By random choice, you go first.");
         playerMove(board, scan);
         board.printBoard();
       } else {
-        System.out.println("The computer plays first.");
+        System.out.println("By random choice, the computer plays first.");
       }
 
       while (true) {
