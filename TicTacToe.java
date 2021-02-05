@@ -10,6 +10,7 @@ public class TicTacToe {
       System.out.print("Choose a difficulty: ");
       String difficulty = scan.nextLine();
       board.printBoard();
+      // choose who plays first- the computer or you
       int xOrOs = (int) (Math.random() * (2 - 1 + 1) + 1);
       if (xOrOs == 1) {
         System.out.println("By random choice, you go first.");
@@ -21,9 +22,10 @@ public class TicTacToe {
 
       while (true) {
         System.out.println("Computer: ");
-
+        // run computer ai
         computerMove(board, difficulty);
         board.printBoard();
+        // check for game over
         if (board.checkBoard() == Node.X || board.checkBoard() == Node.O) {
           System.out.println("You lost!");
           break;
@@ -31,9 +33,10 @@ public class TicTacToe {
           System.out.println("It's a tie!");
           break;
         }
-
+        // ask player to move
         playerMove(board, scan);
         board.printBoard();
+        // check for game over
         if (board.checkBoard() == Node.X || board.checkBoard() == Node.O) {
           System.out.println("You win!");
           break;
@@ -42,6 +45,7 @@ public class TicTacToe {
           break;
         }
       }
+      // ask to play again and reset board
       System.out.println("Play again? (y/n)");
       String playAgain = scan.nextLine();
       if (playAgain.equalsIgnoreCase("y")) {
@@ -58,6 +62,7 @@ public class TicTacToe {
     scan.close();
   }
 
+  // function for user input and player moving on the board
   public static void playerMove(Board board, Scanner scan) {
     while (true) {
       System.out.print("Input the y coordinate of your move: ");
@@ -72,6 +77,7 @@ public class TicTacToe {
     }
   }
 
+  // function for the ai moving one move and at a certain difficulty
   public static void computerMove(Board board, String difficulty) {
     int[] ai = new int[2];
     if (difficulty.equalsIgnoreCase("-a")) {
