@@ -11,7 +11,6 @@ public class TicTacToe {
       String difficulty = scan.nextLine();
       board.printBoard();
       int xOrOs = (int) (Math.random() * (2 - 1 + 1) + 1);
-      System.out.println(xOrOs);
       if (xOrOs == 1) {
         System.out.println("You go first.");
         playerMove(board, scan);
