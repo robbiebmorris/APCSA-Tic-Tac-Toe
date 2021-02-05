@@ -31,15 +31,6 @@ public class Board {
     }
   }
 
-  /*
-   * public String toString()//Adapting the print board method to make it better {
-   * String boardOutput = "\n+-----+\n"; for (int i = 0; i < ROWS; i++) {
-   * boardOutput += "|"; for (int j = 0; j < COLUMNS; j++) { boardOutput += board
-   * [i][j] + "|"; } boardOutput += "\n+-----+\n"; } boardOutput += "\n\n";
-   * 
-   * return boardOutput; }//end toString method
-   */
-
   public boolean isCellFull(int xPos, int yPos) {
     if (board[xPos][yPos] == Node.EMPTY) {
       return false;
@@ -66,12 +57,10 @@ public class Board {
     board[row][col] = letter;
   }
 
-  // for niall to do
   public Node checkBoard() {// This checks who has won the game
     boolean fullBoard = true;
 
     // Check if the board is full and nobody won.
-    // Note: The board is not full in any space is " "
     for (int i = 0; i < boardSize; i++) {
       for (int j = 0; j < boardSize; j++) {
         if (board[i][j] == Node.EMPTY) {
@@ -121,5 +110,5 @@ public class Board {
     // If we reach this line, no one has won and it is a tie
     return Node.EMPTY;
 
-  }// end checkBoard method
+  }
 }
