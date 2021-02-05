@@ -3,11 +3,13 @@ public class Board {
   Node[][] board;
   static int boardSize = 3;
 
+  // constructor method when new object board is created
   public Board() {
     board = new Node[boardSize][boardSize];
     newBoard();
   }
 
+  // function to create new board
   public void newBoard() {
     for (int row = 0; row < boardSize; row++) {
       for (int col = 0; col < boardSize; col++) {
@@ -16,6 +18,7 @@ public class Board {
     }
   }
 
+  // prints out the board with x and y coordinates
   public void printBoard() {
     System.out.println("    1   2   3");
     System.out.println("  -------------");
@@ -31,6 +34,7 @@ public class Board {
     }
   }
 
+  // check if coordinate pair (xpos, ypos) has a letter or not
   public boolean isCellFull(int xPos, int yPos) {
     if (board[xPos][yPos] == Node.EMPTY) {
       return false;
@@ -38,6 +42,7 @@ public class Board {
     return true;
   }
 
+  // check if the game is over via draw
   public boolean isGameOver() {
     for (int row = 0; row < 3; row++) {
       for (int col = 0; col < 3; col++) {
@@ -49,10 +54,12 @@ public class Board {
     return true;
   }
 
+  // return the node at coordinates (row, col)
   public Node getNode(int row, int col) {
     return this.board[row][col];
   }
 
+  // put a node letter at coordinates (row, col)
   public void placeNode(int row, int col, Node letter) {
     board[row][col] = letter;
   }
@@ -60,7 +67,7 @@ public class Board {
   public Node checkBoard() {// This checks who has won the game
     boolean fullBoard = true;
 
-    // Check if the board is full and nobody won.
+    // Check if the board is full and nobody won
     for (int i = 0; i < boardSize; i++) {
       for (int j = 0; j < boardSize; j++) {
         if (board[i][j] == Node.EMPTY) {
@@ -110,5 +117,5 @@ public class Board {
     // If we reach this line, no one has won and it is a tie
     return Node.EMPTY;
 
-  }
+  }// end checkBoard method
 }
